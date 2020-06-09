@@ -7,7 +7,7 @@ import org.apache.flink.util.Collector
 /**
  * @ClassName:CoFlatMapExample
  * @author: zhengkw
- * @description:
+ * @description: 相当于外连接
  * @date: 20/06/09下午 2:36
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
@@ -18,7 +18,7 @@ object CoFlatMapExample {
     env.setParallelism(1)
 
     val one: DataStream[(Int, Long)] = env.fromElements((1, 1L))
-    val two: DataStream[(Int, String)] = env.fromElements((1, "two"))
+    val two: DataStream[(Int, String)] = env.fromElements((2, "two"))
 
     // 将key相同的联合到一起
     val connected: ConnectedStreams[(Int, Long), (Int, String)] = one.keyBy(_._1)
