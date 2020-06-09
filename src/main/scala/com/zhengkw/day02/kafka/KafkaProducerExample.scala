@@ -30,5 +30,7 @@ object KafkaProducerExample {
     )
     val producer = new KafkaProducer[String, String](props)
     producer.send(new ProducerRecord[String, String](topic, "zhengkw"))
+   //没有close无法发送成功！
+    producer.close()
   }
 }
