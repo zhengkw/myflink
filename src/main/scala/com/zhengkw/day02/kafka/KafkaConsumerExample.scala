@@ -15,40 +15,42 @@ import org.apache.flink.streaming.connectors.kafka.{FlinkKafkaConsumer011, Flink
  * @since: jdk 1.8 scala 2.11.8
  */
 object KafkaConsumerExample {
-  val env = StreamExecutionEnvironment.getExecutionEnvironment
-  env.setParallelism(1)
+  def main(args: Array[String]): Unit = {
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+    env.setParallelism(1)
 
-  val props = new Properties()
-  props.put("bootstrap.servers", "hadoop102:9092,hadoop103:9092,hadoop104:9092")
-  props.put("group.id", "consumer-group")
-  props.put(
-    "key.deserializer",
-    "org.apache.kafka.common.serialization.StringDeserialization"
-  )
-  props.put(
-    "value.deserializer",
-    "org.apache.kafka.common.serialization.StringDeserialization"
-  )
-  props.put("auto.offset.reset", "latest")
+    val props = new Properties()
+    props.put("bootstrap.servers", "hadoop102:9092,hadoop103:9092,hadoop104:9092")
+    props.put("group.id", "consumer-group")
+    props.put(
+      "key.deserializer",
+      "org.apache.kafka.common.serialization.StringDeserialization"
+    )
+    props.put(
+      "value.deserializer",
+      "org.apache.kafka.common.serialization.StringDeserialization"
+    )
+    props.put("auto.offset.reset", "latest")
 
-  val stream = env
-    .addSource(
-      new FlinkKafkaConsumer011[String](
-        "test",
-        new SimpleStringSchema(),
-        props
+    val stream = env
+      .addSource(
+        new FlinkKafkaConsumer011[String](
+          "test",
+          new SimpleStringSchema(),
+          props
+        )
       )
-    )
 
-  stream.addSink(
-    new FlinkKafkaProducer011[String](
-      "hadoop102:9092,hadoop103:9092,hadoop104:9092",
-      "test",
-      new SimpleStringSchema()
-    )
-  )
+    /*  stream.addSink(
+        new FlinkKafkaProducer011[String](
+          "hadoop102:9092,hadoop103:9092,hadoop104:9092",
+          "test",
+          new SimpleStringSchema()
+        )
+      )*/
 
-  stream.print()
-  env.execute()
+    stream.print()
+    env.execute()
 
+  }
 }
