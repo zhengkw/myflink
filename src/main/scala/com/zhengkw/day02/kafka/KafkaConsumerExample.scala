@@ -40,14 +40,14 @@ object KafkaConsumerExample {
           props
         )
       )
-
-    /*  stream.addSink(
-        new FlinkKafkaProducer011[String](
-          "hadoop102:9092,hadoop103:9092,hadoop104:9092",
-          "test",
-          new SimpleStringSchema()
-        )
-      )*/
+//消费到一条数据以后 sink回test继续消费 -》 循环队列！
+    stream.addSink(
+      new FlinkKafkaProducer011[String](
+        "hadoop102:9092,hadoop103:9092,hadoop104:9092",
+        "test",
+        new SimpleStringSchema()
+      )
+    )
 
     stream.print()
     env.execute()
