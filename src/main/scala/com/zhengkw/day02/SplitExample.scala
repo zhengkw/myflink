@@ -28,11 +28,8 @@ object SplitExample {
     val small: DataStream[(Int, String)] = splitted.select("small")
     val all: DataStream[(Int, String)] = splitted.select("small", "large")
 
-    large.print()
-    print(s"-------------")
-    small.print()
-    print(s"-------------")
     all.print()
+
     env.execute()
   }
 }

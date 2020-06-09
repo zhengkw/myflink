@@ -6,7 +6,7 @@ import org.apache.flink.streaming.api.scala._
 /**
  * @ClassName:CoMapExample
  * @author: zhengkw
- * @description:
+ * @description: 相当于外连接
  * @date: 20/06/09下午 2:35
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
