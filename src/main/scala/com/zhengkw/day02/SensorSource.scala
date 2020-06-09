@@ -16,7 +16,14 @@ import scala.util.Random
  */
 class SensorSource extends RichParallelSourceFunction[SensorReading] {
   var running = true
-
+/**
+* @descrption:  `run`函数会连续不断的发送`SensorReading`数据
+ *
+ * @param ctx  用于发送数据
+* @return: void
+* @date: 20/06/10 上午 12:46
+* @author: zhengkw
+*/
   override def run(ctx: SourceFunction.SourceContext[SensorReading]): Unit = {
 
     //随机数参数器
