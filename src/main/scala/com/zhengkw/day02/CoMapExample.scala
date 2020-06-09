@@ -17,7 +17,7 @@ object CoMapExample {
     env.setParallelism(1)
 
     val one: DataStream[(Int, Long)] = env.fromElements((1, 1L))
-    val two: DataStream[(Int, String)] = env.fromElements((1, "two"))
+    val two: DataStream[(Int, String)] = env.fromElements((2, "two"))
 
     // 将key相同的联合到一起
     val connected: ConnectedStreams[(Int, Long), (Int, String)] = one.keyBy(_._1)
