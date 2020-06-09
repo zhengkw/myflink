@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/$CACHE_FILE$
+.idea/.gitignore
+.idea/codeStyles/
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/scala_compiler.xml
