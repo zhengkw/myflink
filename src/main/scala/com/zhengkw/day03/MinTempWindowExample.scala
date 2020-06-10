@@ -20,9 +20,9 @@ object MinTempWindowExample {
     stream.map(r => (r.id, r.temperature))
       .keyBy(_._1)
       //开窗滑动窗口
-     // .timeWindow(Time.seconds(5), Time.seconds(2))
+     .timeWindow(Time.seconds(5), Time.seconds(2))
       //固定窗口 滚动窗口
-      .timeWindow(Time.seconds(10))
+     // .timeWindow(Time.seconds(10))
       .reduce((r1, r2) => (r1._1, r1._2.min(r2._2)))
       .print()
     env.execute()
