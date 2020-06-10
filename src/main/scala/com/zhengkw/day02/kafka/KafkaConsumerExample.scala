@@ -5,6 +5,7 @@ import java.util.Properties
 import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.connectors.kafka.{FlinkKafkaConsumer011, FlinkKafkaProducer011}
+import org.apache.kafka.clients.consumer.ConsumerConfig
 
 /**
  * @ClassName:KafkaConsumerExample
@@ -23,7 +24,7 @@ object KafkaConsumerExample {
     props.put("bootstrap.servers", "hadoop102:9092,hadoop103:9092,hadoop104:9092")
     props.put("group.id", "consumer-group")
     props.put(
-      "key.deserializer",
+      ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
       "org.apache.kafka.common.serialization.StringDeserialization"
     )
     props.put(
