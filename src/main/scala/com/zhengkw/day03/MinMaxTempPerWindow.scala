@@ -16,6 +16,22 @@ import org.apache.flink.util.Collector
  * @since: jdk 1.8 scala 2.11.8
  */
 object MinMaxTempPerWindow {
+
+  /**
+   * @descrption:
+   * id: String,  sensorid
+   * min: Double, 最小温度
+   * max: Double, 最大温度
+   * endTs: Long 窗口结束时间！
+   * @return:
+   * @date: 20/06/10 下午 3:32
+   * @author: zhengkw
+   */
+  case class MinMaxTemp(id: String,
+                        min: Double,
+                        max: Double,
+                        endTs: Long)
+
   def main(args: Array[String]): Unit = {
 
 
@@ -39,23 +55,11 @@ class HighAndLowTempPerWindow extends ProcessWindowFunction[SensorReading, MinMa
   override def process(key: String, context: Context, elements: Iterable[SensorReading], out: Collector[MinMaxTemp]): Unit = {
     //只要迭代器中的温度
     val temps = elements.map(_.temperature)
-   //获取窗口信息
+    //获取窗口信息
     val windowEnd = context.window.getEnd
     out.collect(MinMaxTemp(key, temps.min, temps.max, windowEnd))
 
   }
+
+
 }
-/**
-* @descrption:
-*  id: String,  sensorid
- * min: Double, 最小温度
- * max: Double, 最大温度
- * endTs: Long 窗口结束时间！
- * @return:
-* @date: 20/06/10 下午 3:32
-* @author: zhengkw
-*/
-case class MinMaxTemp(id: String,
-                      min: Double,
-                      max: Double,
-                      endTs: Long)
