@@ -65,8 +65,8 @@ class WindowResult extends ProcessWindowFunction[(String, Double, Double),
   }
 }
 
-case class MinMaxTemp(id: String,
+/*case class MinMaxTemp(id: String,
                       min: Double,
                       max: Double,
-                      endTs: Long)
+                      endTs: Long)*/
 
