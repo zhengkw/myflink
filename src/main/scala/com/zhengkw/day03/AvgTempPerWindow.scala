@@ -8,7 +8,7 @@ import org.apache.flink.streaming.api.windowing.time.Time
 /**
  * @ClassName:AvgTempPerWindow
  * @author: zhengkw
- * @description:
+ * @description: 增量聚合
  * @date: 20/06/10下午 2:12
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
