@@ -35,6 +35,7 @@ object AvgTempPerWindow {
 
     //累加逻辑
     override def add(value: (String, Double), accumulator: (String, Double, Long)): (String, Double, Long) = {
+     //每来一条加一次
       (value._1, accumulator._2 + value._2, accumulator._3 + 1)
     }
     //输出逻辑
