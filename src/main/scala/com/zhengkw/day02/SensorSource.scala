@@ -28,6 +28,7 @@ class SensorSource extends RichParallelSourceFunction[SensorReading] {
 
     //随机数参数器
     val random = new Random
+    // random.setSeed(System.currentTimeMillis())
     //模拟10个传感器采集数据
     val curFTemper = (1 to 10).map(i => (
       //使用高斯噪声参数温度读数（华氏温度）
@@ -37,8 +38,8 @@ class SensorSource extends RichParallelSourceFunction[SensorReading] {
     //无线循环，产生数据流
     while (running) {
       //更新温度
-      curFTemper.map(t => (t._1, t._2 + (random.nextGaussian() * 0.5)))
-     // curFTemper.map(t => (t._1, t._2 + (random.nextInt(2))))
+       curFTemper.map(t => (t._1, t._2 + (random.nextGaussian() * 0.5)))
+      //curFTemper.map(t => (t._1, t._2 + 1))
       // 获取当前的时间戳，单位是ms
       val curTime = Calendar.getInstance.getTimeInMillis
 
