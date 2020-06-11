@@ -27,7 +27,7 @@ object WatermarkTest {
     env.setParallelism(1)
     // 系统每隔一分钟的机器时间插入一次水位线
     // env.getConfig.setAutoWatermarkInterval(60000)
-    val stream = env.socketTextStream("hadoop102", 9999)
+    val stream = env.socketTextStream("47.240.72.95", 9999, '\n')
     stream.map((line => {
       val arr = line.split(" ")
       // 第二个元素是时间戳，必须转换成毫秒单位
@@ -45,8 +45,8 @@ object WatermarkTest {
          */
         override def extractTimestamp(element: (String, Long)): Long = element._2
       }).keyBy(_._1)
-    // 10s的滚动窗口
-    .timeWindow(Time.seconds(10))
+      // 10s的滚动窗口
+      .timeWindow(Time.seconds(10))
       .process(new MyProcess)
       .print()
     env.execute()
