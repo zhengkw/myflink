@@ -38,6 +38,7 @@ class SensorSource extends RichParallelSourceFunction[SensorReading] {
     while (running) {
       //更新温度
       curFTemper.map(t => (t._1, t._2 + (random.nextGaussian() * 0.5)))
+     // curFTemper.map(t => (t._1, t._2 + (random.nextInt(2))))
       // 获取当前的时间戳，单位是ms
       val curTime = Calendar.getInstance.getTimeInMillis
 
