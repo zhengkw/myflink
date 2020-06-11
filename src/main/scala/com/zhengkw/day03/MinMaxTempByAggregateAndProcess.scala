@@ -60,6 +60,7 @@ class WindowResult extends ProcessWindowFunction[(String, Double, Double),
   MinMaxTemp, String, TimeWindow] {
   override def process(key: String, context: Context, elements: Iterable[(String, Double, Double)], out: Collector[MinMaxTemp]): Unit = {
     val end = context.window.getEnd
+    //ACC一次只处理一条所以到process这边只能处理一条！
     val result = elements.head
     out.collect(MinMaxTemp(key, result._2, result._3, end))
   }

@@ -8,7 +8,10 @@ import org.apache.flink.streaming.api.windowing.time.Time
 /**
  * @ClassName:AvgTempPerWindow
  * @author: zhengkw
- * @description: 增量聚合
+ * @description: 增量聚合函数
+ *              来一条处理一条，进行聚合，例如reduce
+ *              最后得到的是一个结果，之间的所有元素都进行了聚合
+ *              窗口一旦关闭，则最后的结果被输出！
  * @date: 20/06/10下午 2:12
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
