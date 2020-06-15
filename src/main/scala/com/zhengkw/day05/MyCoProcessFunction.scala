@@ -1,5 +1,7 @@
 package com.zhengkw.day05
 
+import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
+
 /**
  * @ClassName:MyCoProcessFunction
  * @author: zhengkw
@@ -10,6 +12,10 @@ package com.zhengkw.day05
  */
 object MyCoProcessFunction {
   def main(args: Array[String]): Unit = {
+    val env = StreamExecutionEnvironment
+      .getExecutionEnvironment
+    env.setParallelism(1)
+    env.execute()
 
   }
 }
