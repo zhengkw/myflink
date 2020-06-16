@@ -20,7 +20,7 @@ object FlatMapWithStateExample {
       // 第一个参数是输出的元素的类型，第二个参数是状态变量的类型
       .flatMapWithState[(String, Double, Double), Double] {
         case (r: SensorReading, None) => {
-          (List.empty, Some(r.timestamp))
+          (List.empty, Some(r.temperature))
         }
         case (r: SensorReading, lastTemp: Some[Double]) => {
           val tempDiff = (r.temperature - lastTemp.get).abs
