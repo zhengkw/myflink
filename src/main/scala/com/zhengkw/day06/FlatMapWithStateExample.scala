@@ -18,16 +18,20 @@ object FlatMapWithStateExample {
     val stream = env.addSource(new SensorSource)
       .keyBy(_.id)
       // 第一个参数是输出的元素的类型，第二个参数是状态变量的类型
+      // fun: (T, Option[S]) => (TraversableOnce[R], Option[S])) 元组第一个是TraversableOnce
       .flatMapWithState[(String, Double, Double), Double] {
         case (r: SensorReading, None) => {
+          //  (Seq.empty, Some(r.temperature))
           (List.empty, Some(r.temperature))
         }
         case (r: SensorReading, lastTemp: Some[Double]) => {
           val tempDiff = (r.temperature - lastTemp.get).abs
           if (tempDiff > 1.7) {
             (List((r.id, r.temperature, tempDiff)), Some(r.temperature))
+            // (Seq((r.id, r.temperature, tempDiff)), Some(r.temperature))
           } else {
             (List.empty, Some(r.temperature))
+            //(Seq.empty, Some(r.temperature))
           }
         }
       }
