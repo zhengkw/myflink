@@ -72,7 +72,14 @@ object TriggerEventTimeExample {
         TriggerResult.FIRE
       }
     }
-
+/**
+* @descrption: 当窗口闭合执行clear逻辑！
+ * @param window
+ * @param ctx 
+* @return: void
+* @date: 20/06/16 上午 8:49
+* @author: zhengkw
+*/
     override def clear(window: TimeWindow, ctx: Trigger.TriggerContext): Unit = {
       // SingleTon, 单例模式，只会被初始化一次
       val firstSeen = ctx.getPartitionedState(
