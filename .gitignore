@@ -8,3 +8,6 @@
 .idea/misc.xml
 .idea/scala_compiler.xml
 .idea/vcs.xml
+.idea/inspectionProfiles/
+ckp/
+target/
