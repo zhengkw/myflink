@@ -36,7 +36,7 @@ object FlinkTableExample {
     val tableEnv = StreamTableEnvironment.create(env, settings)
 
     tableEnv
-      .connect(new FileSystem().path("/Users/yuanzuo/Desktop/flink-tutorial/FlinkSZ1128/src/main/resources/sensor.txt"))
+      .connect(new FileSystem().path("E:\\IdeaWorkspace\\myflink\\source\\sensor.txt"))
       .withFormat(new Csv()) // 按照csv文件格式解析文件
       .withSchema( // 定义表结构
         new Schema()
