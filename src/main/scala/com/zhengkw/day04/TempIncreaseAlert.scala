@@ -8,9 +8,9 @@ import org.apache.flink.streaming.api.scala._
 import org.apache.flink.util.Collector
 
 /**
- * @ClassName:ad
+ * @ClassName:TempIncreaseAlert
  * @author: zhengkw
- * @description:
+ * @description: 10s内温度连续上升报警
  * @date: 20/06/11下午 3:41
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
