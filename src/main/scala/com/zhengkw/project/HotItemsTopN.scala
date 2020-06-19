@@ -127,6 +127,7 @@ object HotItemsTopN {
    */
   class TopN(val topSize: Int) extends KeyedProcessFunction[Long, ItemViewCount, String] {
     //存放商品的id+ window end+ count
+   //只对key可见
     lazy val listState = getRuntimeContext.getListState(
       new ListStateDescriptor[ItemViewCount]("list-state", classOf[ItemViewCount])
     )

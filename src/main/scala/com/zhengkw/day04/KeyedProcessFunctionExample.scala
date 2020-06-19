@@ -10,7 +10,7 @@ import org.apache.flink.util.Collector
 /**
  * @ClassName:KeyedProcessFunctionExample
  * @author: zhengkw
- * @description:
+ * @description: 基于处理时间语义 完成10s内温度连续上升 报警！
  * @date: 20/06/18下午 10:38
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
@@ -54,8 +54,20 @@ object KeyedProcessFunctionExample {
       val lastTimer = lastTimerState.value()
       //将上次温度的状态进行更新
       lastTempState.update(value.temperature)
-      //todo
-      ctx.timerService().registerEventTimeTimer(value.timestamp)
+      //判断当前温度，如果比之前温度高，并且没有定时器的话，注册10s后的定时器
+      if (value.temperature > lastTemp && lastTimer == 0L) {
+        //创建一个定时器 获取一个定时器 time为TempIncreWarning构造器传入的参数！
+        val ts = ctx.timerService().currentProcessingTime() + time
+        ctx.timerService().registerProcessingTimeTimer(ts)
+        //更新时间状态！
+        lastTimerState.update(ts)
+      } else if (value.temperature < lastTemp) {
+        //如果温度下降删除定时器！
+        ctx.timerService().deleteProcessingTimeTimer(lastTimer)
+        //清空时间状态
+        lastTimerState.clear()
+      }
+
     }
 
     /**
