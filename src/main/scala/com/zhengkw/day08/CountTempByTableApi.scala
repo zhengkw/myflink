@@ -30,6 +30,7 @@ object CountTempByTableApi {
     // 将流转换成动态表
     val dataTable = tableEnv
       .fromDataStream(stream, 'id, 'timestamp.rowtime as 'ts, 'temperature as 'temp)
+     //窗口别名w
       .window(Tumble over 10.seconds on 'ts as 'w)
       .groupBy('id, 'w) // keyby.timeWindow
       .select('id, 'id.count) // 每个窗口有多少条数据
